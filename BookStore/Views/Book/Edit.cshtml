@@ -1,0 +1,56 @@
+﻿@model BookStore.ModelView.BookAuthorModeView
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>BookAuthorModeView</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" readonly class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Discription" class="control-label"></label>
+                <input asp-for="Discription" class="form-control" />
+                <span asp-validation-for="Discription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="File" class="control-label"></label>
+                <input type="file" name="File" asp-for="File" class="form-control" />
+                <span asp-validation-for="File" class="text-danger"></span>
+                <img src="~/Uploads/@Model.fileURL" style="width:128px" class="img-thumbnail" />
+            </div>
+            <div class="form-group">
+                <label asp-for="AuthorId" class="control-label"></label>
+                <select asp-for="AuthorId" class="form-control"
+                        asp-items="@(new SelectList(Model.Authors,"ID","FullName"))"></select>
+                <span asp-validation-for="AuthorId" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="fileURL" class="form-control" />  
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-outline-info" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>
+
+@section Scripts {
+    <partial name="_validation" />
+}
